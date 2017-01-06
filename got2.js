@@ -15,7 +15,7 @@ var kings = [
 //     "Long live King [name] of House [house]!" (five times...)
 console.log("Number 1:");
 function hailTo(king){
-    console.log("Long live King ", king.name, " of House ", king.house, "!")
+    console.log("Long live King", king.name, "of House", king.house, "!")
 };
 
 kings.forEach(function(king){hailTo(king)});
@@ -26,7 +26,7 @@ kings.forEach(function(king){hailTo(king)});
 console.log("Number 2:");
 
 function declaim(king){
-  console.log("Woe be to the pretender ", king.name, "of the house ", king.house, "...")
+  console.log("Woe be to the pretender", king.name, "of the house", king.house, "...")
 };
 
 // 3.  Now we must hail all of the kings. Give a true hail only to the king on
@@ -45,7 +45,7 @@ kings.forEach(function(king){
 //     "The [king/pretender] [name] of house [house] must kneel!"
 console.log("Number 4:");
 var kneel = function(king){
-  console.log("The pretender" + king.name + "of house " + king.house + " must kneel!")
+  console.log("The pretender " + king.name + " of house " + king.house + " must kneel!")
 }
 
 // 5.  Finally, the struggle begins: Loop over the list of kings, either hailing
@@ -65,7 +65,7 @@ console.log("Number 5:");
 // 4. loop 1-3 until only one king left
 
 /* STEP 2: WRITE THE CODE THAT IS INSIDE THE LOOPS as functions. */
-function kingRollCall(arr) {
+function rollCall(arr) {
   arr.forEach(function(king){
     if(!king.ironThrone){
       declaim(king)
@@ -77,19 +77,27 @@ function kingRollCall(arr) {
 
 
 function makeKneel(arr){
-  var selection = Math.floor(Math.random()*arr.length-1);
+  var selection = Math.floor(Math.random()*arr.length);
   kneel(kings[selection]);
-  kings = arr.splice(selection, 1);
+  arr.splice(selection, 1);
 }
 
 
 /* STEP 3: INCORPORATE THE LOOPS WITH THE CODE. */
 var i = kings.length;
-while(i>1){
-  kingRollCall(kings);
-  makeKneel(kings);
+var j = 1
+while(i>0){
+  console.log("     GoT Season " + (j++) + ":")
+  if(kings.length===1){
+    return hailTo(kings[0])
+  } else {
   if (!kings[0].ironThrone){
     kings[0].ironThrone = true
   };
+  rollCall(kings);
+  makeKneel(kings);
   i--
 }
+}
+// rollCall(kings);
+// console.log(kings)
